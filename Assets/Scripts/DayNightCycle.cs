@@ -5,6 +5,7 @@ public class DayNightCycle : MonoBehaviour
 {
     [SerializeField] VoidEventChannel _switchEvent;
     [SerializeField] bool _smoothTransition = true;
+    [SerializeField] float _smoothness = 0.5f;
     [SerializeField] float _dayTime = 60;
     [SerializeField] float _nightTime = 60;
     [SerializeField] float _dayColorDelta = 3000;
@@ -16,6 +17,7 @@ public class DayNightCycle : MonoBehaviour
 
     Light _directionalLight;
     bool _day = true, _inTransition = false;
+    float _dayColor = 5000, _nightColor = 8000;
     float _currentTime = 0, _dayColorChange, _nightColorChange, _dayRotationChange;
 
     #region SETUP
@@ -75,24 +77,25 @@ public class DayNightCycle : MonoBehaviour
     {
         _currentTime = 0;
         _day = !_day;
+        _directionalLight.colorTemperature = _day ? _dayColor : _nightColor;
         var targetRot = _day ? _dayStartRotation : _nightStartRotation;
 
-        if (_smoothTransition)
-        {
-            _inTransition = true;
-            StartCoroutine(SmoothTransition(targetRot));
-        }
-        else
-        {
-            transform.rotation = targetRot;
-        }
+        if (_smoothTransition) StartCoroutine(SmoothTransition(targetRot));
+        else transform.rotation = targetRot;
     }
 
     IEnumerator SmoothTransition(Quaternion targetRot)
     {
+        _inTransition = true;
+
         while (transform.rotation != targetRot)
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, 1);
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation,
+                targetRot,
+                _smoothness
+            );
+
             yield return null;
         }
 

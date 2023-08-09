@@ -36,16 +36,19 @@ public class InputReader : ScriptableObject, GameInput.IGameControlsActions
 
 	public void OnMove(InputAction.CallbackContext context)
 	{
+		Debug.Log($"{context.ReadValue<Vector2>()}!");
 		moveEvent?.Invoke(context.ReadValue<Vector2>());
 	}
 
 	public void OnBuildMenu(InputAction.CallbackContext context)
 	{
+		Debug.Log("Build!");
 		buildMenuEvent?.Invoke();
 	}
 
 	public void OnEndDay(InputAction.CallbackContext context)
 	{
+		Debug.Log("Enter!");
 		if (context.phase == InputActionPhase.Performed)
 			endDayEvent?.Invoke();
 	}
