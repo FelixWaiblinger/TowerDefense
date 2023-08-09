@@ -48,8 +48,7 @@ public class DayNightCycle : MonoBehaviour
 
         _currentTime += Time.deltaTime;
 
-        if (_day ? UpdateDay() : UpdateNight())
-            Transition();
+        if (_day ? UpdateDay() : UpdateNight()) Transition();
     }
 
     bool UpdateDay()

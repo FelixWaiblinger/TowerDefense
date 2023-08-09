@@ -7,7 +7,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private bool _spawnAtOnce = true;
     [SerializeField] private int _spawnAmount = 1;
     [SerializeField] private float _spawnRate = 1; // per second
-    [SerializeField] private Vector3 _spawnOffset = Vector3.forward;
+    [SerializeField] private float _spawnOffsetFWD = 1;
 
     private float _currentTime = 0;
     private bool _spawn = false;
@@ -38,12 +38,10 @@ public class EnemySpawner : MonoBehaviour
             if (_currentTime > 1f / _spawnRate)
             {
                 CreateEnemy();
+                _currentTime = 0;
             }
         }
-        else
-        {
-            _spawn = false;
-        }
+        else _spawn = false;
     }
 
     void SpawnEnemies()
@@ -58,16 +56,19 @@ public class EnemySpawner : MonoBehaviour
                 CreateEnemy();
             }
         }
-        else
-        {
-            _spawn = true;
-        }
+        else _spawn = true;
     }
 
     void CreateEnemy()
     {
-        var noise = Vector3.Scale(Random.insideUnitSphere, new Vector3(1, 1, 0));
-        var enemy = Instantiate(_enemyType, _spawnOffset + noise, Quaternion.identity);
+        var noise = Vector3.Scale(Random.insideUnitSphere, new Vector3(1, 0, 1));
+        
+        var enemy = Instantiate(
+            _enemyType,
+            transform.position + noise + transform.forward * _spawnOffsetFWD,
+            Quaternion.identity
+        );
+
         enemy.transform.SetParent(transform);
     }
 }
