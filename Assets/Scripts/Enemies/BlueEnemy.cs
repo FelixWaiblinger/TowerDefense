@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class BlueEnemy : Enemy
 {
+    void FixedUpdate()
+    {
+        FindLocalTarget();
+    }
+
     void Update()
     {
-        CheckLocalTarget();
-
         transform.position = Vector3.MoveTowards(
             transform.position,
             _localTarget == null ? _globalTarget.position : _localTarget.position,
@@ -17,5 +20,10 @@ public class BlueEnemy : Enemy
             _localTarget == null ? _globalTarget.rotation : _localTarget.rotation,
             1
         );
+    }
+
+    protected override void Attack()
+    {
+
     }
 }
