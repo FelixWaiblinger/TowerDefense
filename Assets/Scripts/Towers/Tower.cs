@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Tower : MonoBehaviour
@@ -20,10 +21,12 @@ public abstract class Tower : MonoBehaviour
 
     void FindTarget()
     {
-        var structures = Physics.OverlapSphere(transform.position, _attackRange, 11); // enemy layer
+        // find all enemies in range using their layer
+        var structures = Physics.OverlapSphere(transform.position, _attackRange, 11);
         
         if (structures.Length == 0) return;
-
+        
+        // find closest enemy
         float minDistance = _attackRange;
         foreach (Collider s in structures)
         {
