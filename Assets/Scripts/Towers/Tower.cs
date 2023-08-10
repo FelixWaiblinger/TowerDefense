@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour
+public abstract class Tower : MonoBehaviour
 {
     [SerializeField] protected EntityUI _status;
 
@@ -9,20 +9,18 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected int _attackDamage;
     [SerializeField] protected float _attackRate;
     [SerializeField] protected float _attackRange;
-    [SerializeField] protected float _moveSpeed;
 
     protected int _currentHealth;
-    protected Transform _globalTarget, _localTarget = null;
+    protected Enemy _currentTarget = null;
 
     protected void Start()
     {
-        _globalTarget = GameObject.FindGameObjectWithTag("Nexus").transform;
         _currentHealth = _maxHealth;
     }
 
-    protected void FindLocalTarget()
+    void FindTarget()
     {
-        var structures = Physics.OverlapSphere(transform.position, _attackRange, 10); // player layer
+        var structures = Physics.OverlapSphere(transform.position, _attackRange, 11); // enemy layer
         
         if (structures.Length == 0) return;
 
@@ -34,7 +32,7 @@ public abstract class Enemy : MonoBehaviour
             if (distance < minDistance)
             {
                 minDistance = distance;
-                _localTarget = s.transform;
+                _currentTarget = s.gameObject.GetComponent<Enemy>();
             }
         }
     }
