@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Tower : MonoBehaviour
@@ -8,15 +7,28 @@ public abstract class Tower : MonoBehaviour
     [Header("Stats")]
     [SerializeField] protected int _maxHealth;
     [SerializeField] protected int _attackDamage;
+    [Tooltip("Attacks per second")]
     [SerializeField] protected float _attackRate;
     [SerializeField] protected float _attackRange;
 
     protected int _currentHealth;
     protected Enemy _currentTarget = null;
+    protected Outline _outline;
 
     protected void Start()
     {
         _currentHealth = _maxHealth;
+        _outline = gameObject.GetComponent<Outline>();
+    }
+
+    protected void OnMouseEnter()
+    {
+        _outline.enabled = true;
+    }
+
+    protected void OnMouseExit()
+    {
+        _outline.enabled = false;
     }
 
     void FindTarget()
