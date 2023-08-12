@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class LoseUI : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private StatisticData _statistics;
+    [SerializeField] private TMP_Text _dayCount;
+    [SerializeField] private TMP_Text _structuresBuilt;
+    [SerializeField] private TMP_Text _structuresLost;
+    [SerializeField] private TMP_Text _enemiesKilled;
+    [SerializeField] private TMP_Text _eliteEnemiesKilled;
+    
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _dayCount.text = _statistics.DayCount.ToString();
+        _structuresBuilt.text = _statistics.StructuresBuilt.ToString();
+        _structuresLost.text = _statistics.StructuresLost.ToString();
+        _enemiesKilled.text = _statistics.EnemiesKilled.ToString();
+        _eliteEnemiesKilled.text = _statistics.EliteEnemiesKilled.ToString();
     }
 }

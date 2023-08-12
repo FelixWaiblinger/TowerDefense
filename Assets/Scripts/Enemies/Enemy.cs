@@ -7,17 +7,30 @@ public abstract class Enemy : MonoBehaviour
     [Header("Stats")]
     [SerializeField] protected int _maxHealth;
     [SerializeField] protected int _attackDamage;
+    [Tooltip("Attacks per second")]
     [SerializeField] protected float _attackRate;
     [SerializeField] protected float _attackRange;
     [SerializeField] protected float _moveSpeed;
 
     protected int _currentHealth;
     protected Transform _globalTarget, _localTarget = null;
+    protected Outline _outline;
 
     protected void Start()
     {
         _globalTarget = GameObject.FindGameObjectWithTag("Nexus").transform;
         _currentHealth = _maxHealth;
+        _outline = gameObject.GetComponent<Outline>();
+    }
+
+    protected void OnMouseEnter()
+    {
+        _outline.enabled = true;
+    }
+
+    protected void OnMouseExit()
+    {
+        _outline.enabled = false;
     }
 
     protected void FindLocalTarget()

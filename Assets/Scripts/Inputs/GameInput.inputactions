@@ -6,16 +6,43 @@
             "id": "bdfdad2b-afd4-4f8a-a1c1-a1f0a03a1960",
             "actions": [
                 {
-                    "name": "BuildMenu",
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "49d175b4-168d-4df6-a01f-82c9b2d1ba42",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Zoom",
+                    "type": "Value",
+                    "id": "c0558c78-c5bf-4e2c-bd03-314916267ca9",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Select",
                     "type": "Button",
-                    "id": "cd278fca-46cb-4781-b41d-54922d105b2f",
+                    "id": "33db18c2-f2b8-4544-8131-35c0ac5ef863",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "EndDay",
+                    "name": "Drag",
+                    "type": "Button",
+                    "id": "d88e6224-4fe4-4613-b0d2-fe0accd59de2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Defend",
                     "type": "Button",
                     "id": "25984f56-390c-42d8-8bb8-5d9bb74bd431",
                     "expectedControlType": "Button",
@@ -24,27 +51,16 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Move",
-                    "type": "Value",
-                    "id": "49d175b4-168d-4df6-a01f-82c9b2d1ba42",
-                    "expectedControlType": "Vector2",
+                    "name": "Cancel",
+                    "type": "Button",
+                    "id": "89c6e849-2f16-4ab5-96e5-7ca7920f36c2",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "861c3f80-84b4-4342-8473-63851831dff0",
-                    "path": "<Keyboard>/b",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "MouseKeyboard",
-                    "action": "BuildMenu",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "17263a1d-2034-4e09-b983-94176722a147",
@@ -52,18 +68,62 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "MouseKeyboard",
-                    "action": "EndDay",
+                    "action": "Defend",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "1c6e5531-92ed-42ce-afbb-e2eef92b5dd4",
-                    "path": "<Mouse>/position",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "MouseKeyboard",
                     "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3d7fbff4-3d67-4909-8173-7e9e79c6b7ad",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MouseKeyboard",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aeadb35f-d56d-47f6-9377-ea0435250914",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MouseKeyboard",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a36677bd-6d00-41a8-9acb-fd750a4b1161",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MouseKeyboard",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f163e7f1-70a9-4cac-90c0-37fc9b38bbba",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "MouseKeyboard",
+                    "action": "Drag",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

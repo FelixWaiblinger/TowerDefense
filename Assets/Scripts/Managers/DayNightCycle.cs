@@ -3,12 +3,20 @@ using UnityEngine;
 
 public class DayNightCycle : MonoBehaviour
 {
-    [SerializeField] VoidEventChannel _switchEvent;
+    [SerializeField] VoidEventChannel _defendEvent;
+    [Tooltip("Day&Night transition smooth or instantaneous")]
     [SerializeField] bool _smoothTransition = true;
+    [Tooltip("Higher value for faster transition")]
     [SerializeField] float _smoothness = 0.5f;
+    [Tooltip("Day&Night transition after given time or event-based only")]
+    [SerializeField] bool _timedTransition = true;
+    [Tooltip("Time in seconds until the day ends")]
     [SerializeField] float _dayTime = 60;
+    [Tooltip("Time in seconds until the night ends")]
     [SerializeField] float _nightTime = 60;
+    [Tooltip("Shift in color temperature over entire day")]
     [SerializeField] float _dayColorDelta = 3000;
+    [Tooltip("Random variations in color temperature during the night")]
     [SerializeField] float _nightColorDelta = 100;
     
     Quaternion _dayStartRotation = Quaternion.Euler(50, 120, 0);
@@ -24,12 +32,12 @@ public class DayNightCycle : MonoBehaviour
 
     void OnEnable()
     {
-        _switchEvent.OnVoidEventRaised += Transition;
+        _defendEvent.OnVoidEventRaised += Transition;
     }
 
     void OnDisable()
     {
-        _switchEvent.OnVoidEventRaised -= Transition;
+        _defendEvent.OnVoidEventRaised -= Transition;
     }
 
     void Start()
@@ -44,6 +52,8 @@ public class DayNightCycle : MonoBehaviour
 
     void Update()
     {
+        if (!_timedTransition) return; // event-based transitions only
+
         if (_inTransition) return;
 
         _currentTime += Time.deltaTime;

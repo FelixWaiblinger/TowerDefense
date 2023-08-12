@@ -6,8 +6,11 @@ using UnityEngine.Events;
 public class InputReader : ScriptableObject, GameInput.IGameControlsActions
 {
 	public static UnityAction<Vector2> moveEvent;
-	public static UnityAction buildMenuEvent;
-	public static UnityAction endDayEvent;
+	public static UnityAction<Vector2> zoomEvent;
+	public static UnityAction selectEvent;
+	public static UnityAction dragEvent;
+	public static UnityAction defendEvent;
+	public static UnityAction cancelEvent;
 
 	private GameInput gameInput;
 
@@ -34,23 +37,44 @@ public class InputReader : ScriptableObject, GameInput.IGameControlsActions
 
 	#region CALLBACKS
 
+	// move camera in xz plane (screen edge, delta during drag)
 	public void OnMove(InputAction.CallbackContext context)
 	{
-		Debug.Log($"{context.ReadValue<Vector2>()}!");
 		moveEvent?.Invoke(context.ReadValue<Vector2>());
 	}
 
-	public void OnBuildMenu(InputAction.CallbackContext context)
+	// move camera in y direction ?? (scroll wheel)
+	public void OnZoom(InputAction.CallbackContext context)
 	{
-		Debug.Log("Build!");
-		buildMenuEvent?.Invoke();
+		moveEvent?.Invoke(context.ReadValue<Vector2>());
 	}
 
-	public void OnEndDay(InputAction.CallbackContext context)
+	// select object under mouse (left click)
+	public void OnSelect(InputAction.CallbackContext context)
 	{
-		Debug.Log("Enter!");
 		if (context.phase == InputActionPhase.Performed)
-			endDayEvent?.Invoke();
+			defendEvent?.Invoke();
+	}
+
+	// alternative camera movement (right click)
+	public void OnDrag(InputAction.CallbackContext context)
+	{
+		if (context.phase == InputActionPhase.Performed)
+			defendEvent?.Invoke();
+	}
+
+	// end planning phase (enter)
+	public void OnDefend(InputAction.CallbackContext context)
+	{
+		if (context.phase == InputActionPhase.Performed)
+			defendEvent?.Invoke();
+	}
+
+	// deselect current selection (escape)
+	public void OnCancel(InputAction.CallbackContext context)
+	{
+		if (context.phase == InputActionPhase.Performed)
+			defendEvent?.Invoke();
 	}
 
 	#endregion

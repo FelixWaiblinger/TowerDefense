@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class CameraTarget : MonoBehaviour
 {
-    [SerializeField] private VoidEventChannel _spawnEvent;
     private Camera _camera;
     private Plane _ground = new(Vector3.up, Vector3.zero);
 
@@ -11,7 +10,6 @@ public class CameraTarget : MonoBehaviour
     void OnEnable()
     {
         InputReader.moveEvent += MoveTarget;
-        InputReader.buildMenuEvent += () => _spawnEvent.RaiseVoidEvent();
     }
 
     void OnDisable()
@@ -32,6 +30,5 @@ public class CameraTarget : MonoBehaviour
         _ground.Raycast(ray, out float enter);
 
         transform.position = ray.GetPoint(enter);
-        Debug.Log($"Move to {transform.position}");
     }
 }
