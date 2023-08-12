@@ -1,18 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Farm : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private int _maxHealth;
+    [SerializeField] private int _incomeAmount;
+    [SerializeField] private int _incomeRate;
+    
+    private int _currentHealth;
+
     void Start()
     {
-        
+        _currentHealth = _maxHealth;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (_currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

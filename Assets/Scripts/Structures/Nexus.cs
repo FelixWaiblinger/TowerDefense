@@ -6,7 +6,11 @@ public class Nexus : Tower
     
     void Update()
     {
-        
+        if (_currentHealth <= 0)
+        {
+            _loseEvent.RaiseVoidEvent();
+            Destroy(gameObject);
+        }
     }
 
     protected override void Attack()

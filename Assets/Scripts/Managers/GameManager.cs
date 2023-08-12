@@ -17,13 +17,13 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         _defendEvent.OnVoidEventRaised += EndTurn;
-        _loseEvent.OnVoidEventRaised += ShowSummary;
+        _loseEvent.OnVoidEventRaised += GameOver;
     }
 
     void OnDisable()
     {
         _defendEvent.OnVoidEventRaised -= EndTurn;
-        _loseEvent.OnVoidEventRaised -= ShowSummary;
+        _loseEvent.OnVoidEventRaised -= GameOver;
     }
 
     void Start()
@@ -50,8 +50,9 @@ public class GameManager : MonoBehaviour
         _day = !_day;
     }
 
-    void ShowSummary()
+    void GameOver()
     {
         Instantiate(_gameOver, Vector3.zero, Quaternion.identity);
+        Time.timeScale = 0; // is this a good idea?
     }
 }

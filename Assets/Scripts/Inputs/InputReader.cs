@@ -16,7 +16,7 @@ public class InputReader : ScriptableObject, GameInput.IGameControlsActions
 
 	#region SETUP
 
-	private void OnEnable()
+	void OnEnable()
 	{
 		if (gameInput == null)
 		{
@@ -24,13 +24,12 @@ public class InputReader : ScriptableObject, GameInput.IGameControlsActions
 			gameInput.GameControls.SetCallbacks(this);
 		}
 
-        gameInput.GameControls.Enable();
-		//EnableGameplayInput();
+        EnableInput();
 	}
 
-	private void OnDisable()
+	void OnDisable()
 	{
-		//DisableAllInput();
+		DisableInput();
 	}
 
 	#endregion
@@ -81,23 +80,15 @@ public class InputReader : ScriptableObject, GameInput.IGameControlsActions
 
 	#region SWITCH INPUT
 
-	//public void EnableDialogueInput()
-	//{
-	//	gameInput.Dialogues.Enable();
-	//	gameInput.Gameplay.Disable();
-	//}
-    //
-	//public void EnableGameplayInput()
-	//{
-	//	gameInput.Gameplay.Enable();
-	//	gameInput.Dialogues.Disable();
-	//}
-    //
-	//public void DisableAllInput()
-	//{
-	//	gameInput.Gameplay.Disable();
-	//	gameInput.Dialogues.Disable();
-	//}
+	public void EnableInput()
+	{
+		gameInput.GameControls.Enable();
+	}
+    
+	public void DisableInput()
+	{
+		gameInput.GameControls.Disable();
+	}
 
 	#endregion
 }
