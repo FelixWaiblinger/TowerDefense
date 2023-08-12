@@ -80,6 +80,24 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Build"",
+                    ""type"": ""Button"",
+                    ""id"": ""8e294e72-feba-41c3-9ba3-b81d562ca909"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""d1ecddd7-5df7-4d6a-88eb-eca46d93d2c3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -120,7 +138,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""aeadb35f-d56d-47f6-9377-ea0435250914"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
                     ""groups"": ""MouseKeyboard"",
                     ""action"": ""Select"",
@@ -146,6 +164,28 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""MouseKeyboard"",
                     ""action"": ""Drag"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1389c991-0544-4ec8-a627-a0f7f5443fdf"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""MouseKeyboard"",
+                    ""action"": ""Build"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f0014660-a7ff-4d97-8636-fddbcee0311b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""MouseKeyboard"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -179,6 +219,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_GameControls_Drag = m_GameControls.FindAction("Drag", throwIfNotFound: true);
         m_GameControls_Defend = m_GameControls.FindAction("Defend", throwIfNotFound: true);
         m_GameControls_Cancel = m_GameControls.FindAction("Cancel", throwIfNotFound: true);
+        m_GameControls_Build = m_GameControls.FindAction("Build", throwIfNotFound: true);
+        m_GameControls_Pause = m_GameControls.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -246,6 +288,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_GameControls_Drag;
     private readonly InputAction m_GameControls_Defend;
     private readonly InputAction m_GameControls_Cancel;
+    private readonly InputAction m_GameControls_Build;
+    private readonly InputAction m_GameControls_Pause;
     public struct GameControlsActions
     {
         private @GameInput m_Wrapper;
@@ -256,6 +300,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @Drag => m_Wrapper.m_GameControls_Drag;
         public InputAction @Defend => m_Wrapper.m_GameControls_Defend;
         public InputAction @Cancel => m_Wrapper.m_GameControls_Cancel;
+        public InputAction @Build => m_Wrapper.m_GameControls_Build;
+        public InputAction @Pause => m_Wrapper.m_GameControls_Pause;
         public InputActionMap Get() { return m_Wrapper.m_GameControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -283,6 +329,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Cancel.started += instance.OnCancel;
             @Cancel.performed += instance.OnCancel;
             @Cancel.canceled += instance.OnCancel;
+            @Build.started += instance.OnBuild;
+            @Build.performed += instance.OnBuild;
+            @Build.canceled += instance.OnBuild;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IGameControlsActions instance)
@@ -305,6 +357,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Cancel.started -= instance.OnCancel;
             @Cancel.performed -= instance.OnCancel;
             @Cancel.canceled -= instance.OnCancel;
+            @Build.started -= instance.OnBuild;
+            @Build.performed -= instance.OnBuild;
+            @Build.canceled -= instance.OnBuild;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IGameControlsActions instance)
@@ -339,5 +397,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnDrag(InputAction.CallbackContext context);
         void OnDefend(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
+        void OnBuild(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

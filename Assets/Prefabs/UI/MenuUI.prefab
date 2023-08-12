@@ -520,7 +520,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 6777824311978718986}
-  _settings: {fileID: 0}
+  _settings: {fileID: 4411606160001953679, guid: 955a57f6300d1cf42b278da76256a24b,
+    type: 3}
   _sceneEvent: {fileID: 11400000, guid: aa33f93275f8e3a4997c7b25e8f1ccd6, type: 2}
 --- !u!1 &3719874128576550540
 GameObject:

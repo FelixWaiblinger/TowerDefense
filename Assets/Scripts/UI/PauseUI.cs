@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PauseUI : MonoBehaviour
 {
+    [SerializeField] private IntEventChannel _sceneEvent;
+
+    [Header("UI elements")]
     [SerializeField] private Canvas _canvas;
     [SerializeField] private SettingsUI _settings;
 
@@ -32,7 +33,7 @@ public class PauseUI : MonoBehaviour
 
     public void Quit()
     {
-        // TODO return to main menu
+        _sceneEvent.RaiseIntEvent(1);
     }
 
     #endregion

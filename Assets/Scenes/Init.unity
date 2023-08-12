@@ -397,6 +397,51 @@ MonoBehaviour:
   _sceneEvent: {fileID: 11400000, guid: aa33f93275f8e3a4997c7b25e8f1ccd6, type: 2}
   _loadingScreen: {fileID: 1481440524}
   _progressBar: {fileID: 389125184}
+--- !u!1 &961595408
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 961595410}
+  - component: {fileID: 961595409}
+  m_Layer: 0
+  m_Name: FPSManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &961595409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961595408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 220486a8f5c62004a8af4de63d5b57d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetFPS: 60
+--- !u!4 &961595410
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961595408}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1313621007
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,6 +986,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f17c42db7705d85428ffaa66d9f171ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _audioEvent: {fileID: 11400000, guid: 7cd5f324d3dc55740bdf40a71e7d68a4, type: 2}
+  _volumeEvent: {fileID: 11400000, guid: 8b75d756889a1f846af6968f80a5e496, type: 2}
+  _gameInfo: {fileID: 11400000, guid: 09bf1f5f82106fb4ea3d5d0ae68f1db7, type: 2}
+  _themes: []
+  _music: {fileID: 0}
+  _effects: []
 --- !u!82 &1588955488
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1044,4 +1095,5 @@ SceneRoots:
   - {fileID: 1538586717}
   - {fileID: 797581195}
   - {fileID: 1588955486}
+  - {fileID: 961595410}
   - {fileID: 1475987627}

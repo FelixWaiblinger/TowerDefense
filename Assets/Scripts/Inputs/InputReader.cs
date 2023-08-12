@@ -11,6 +11,8 @@ public class InputReader : ScriptableObject, GameInput.IGameControlsActions
 	public static UnityAction dragEvent;
 	public static UnityAction defendEvent;
 	public static UnityAction cancelEvent;
+	public static UnityAction buildEvent;
+	public static UnityAction pauseEvent;
 
 	private GameInput gameInput;
 
@@ -48,14 +50,14 @@ public class InputReader : ScriptableObject, GameInput.IGameControlsActions
 		moveEvent?.Invoke(context.ReadValue<Vector2>());
 	}
 
-	// select object under mouse (left click)
+	// select object under mouse (left mouse click)
 	public void OnSelect(InputAction.CallbackContext context)
 	{
 		if (context.phase == InputActionPhase.Performed)
 			defendEvent?.Invoke();
 	}
 
-	// alternative camera movement (right click)
+	// alternative camera movement (left mouse hold)
 	public void OnDrag(InputAction.CallbackContext context)
 	{
 		if (context.phase == InputActionPhase.Performed)
@@ -69,11 +71,25 @@ public class InputReader : ScriptableObject, GameInput.IGameControlsActions
 			defendEvent?.Invoke();
 	}
 
-	// deselect current selection (escape)
+	// deselect current selection (right mouse click)
 	public void OnCancel(InputAction.CallbackContext context)
 	{
 		if (context.phase == InputActionPhase.Performed)
 			defendEvent?.Invoke();
+	}
+
+	// open build menu (b)
+	public void OnBuild(InputAction.CallbackContext context)
+	{
+		if (context.phase == InputActionPhase.Performed)
+			buildEvent?.Invoke();
+	}
+
+	// pause the game (escape)
+	public void OnPause(InputAction.CallbackContext context)
+	{
+		if (context.phase == InputActionPhase.Performed)
+			pauseEvent?.Invoke();
 	}
 
 	#endregion

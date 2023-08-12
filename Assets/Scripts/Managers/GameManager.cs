@@ -2,15 +2,23 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Events")]
     [SerializeField] private VoidEventChannel _defendEvent;
     [SerializeField] private VoidEventChannel _loseEvent;
     [SerializeField] private VoidEventChannel _winEvent;
 
+    [Header("UI")]
+    [SerializeField] private GameUI _HUD;
     [SerializeField] private LoseUI _gameOver;
+
+    [Header("Data storage")]
+    [SerializeField] private GameData _gameInfo;
     [SerializeField] private StatisticData _statistics;
     [SerializeField] private UpgradeData _upgrades;
 
     private bool _day = true;
+    private int _money;
+    private int _research;
 
     #region SETUP
 
@@ -28,7 +36,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+        _money = _gameInfo.StartMoney;
+        _research = _gameInfo.StartResearch;
     }
 
     #endregion

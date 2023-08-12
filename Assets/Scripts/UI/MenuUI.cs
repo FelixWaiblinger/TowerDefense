@@ -10,7 +10,7 @@ public class MenuUI : MonoBehaviour
 
     void Update()
     {
-        if (_canvas.enabled && !_openSettings)
+        if (!_canvas.enabled && !_openSettings)
             _canvas.enabled = true;
     }
 
@@ -22,7 +22,11 @@ public class MenuUI : MonoBehaviour
     public void Settings()
     {
         _canvas.enabled = false;
-        _openSettings = Instantiate(_settings, transform).gameObject;
+        _openSettings = Instantiate(
+            _settings,
+            Vector3.zero,
+            Quaternion.identity
+        ).gameObject;
     }
 
     public void Quit()
