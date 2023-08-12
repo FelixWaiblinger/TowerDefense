@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 547669763033067254}
   - component: {fileID: 5799605231781840847}
-  m_Layer: 0
+  - component: {fileID: 4471184427424323292}
+  - component: {fileID: 2970705722398938283}
+  m_Layer: 10
   m_Name: Ballista
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,6 +53,45 @@ MonoBehaviour:
   _attackDamage: 5
   _attackRate: 1
   _attackRange: 20
+--- !u!65 &4471184427424323292
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851551361424950867}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 6, z: 3}
+  m_Center: {x: 0, y: 2.5, z: 0}
+--- !u!114 &2970705722398938283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851551361424950867}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0, b: 0, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &5004260562014336625
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,8 +103,7 @@ GameObject:
   - component: {fileID: 6787066547235825246}
   - component: {fileID: 7416423599085088938}
   - component: {fileID: 8478110214379068399}
-  - component: {fileID: 3110562853654436480}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,27 +175,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3110562853654436480
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5004260562014336625}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &5755364010553367757
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -164,6 +183,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 547669763033067254}
     m_Modifications:
+    - target: {fileID: 5084158156202937148, guid: 69152c4a102bab9489f8b625cedd0e6f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5499019416475302697, guid: 69152c4a102bab9489f8b625cedd0e6f,
         type: 3}
       propertyPath: m_Pivot.x
@@ -279,10 +303,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7958460033227710370, guid: 69152c4a102bab9489f8b625cedd0e6f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8111428709060184519, guid: 69152c4a102bab9489f8b625cedd0e6f,
         type: 3}
       propertyPath: m_Name
       value: EntityUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111428709060184519, guid: 69152c4a102bab9489f8b625cedd0e6f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
