@@ -44,7 +44,7 @@ public class SceneHandler : MonoBehaviour
     {
         _targetProgress = 0;
 
-        // load next scene
+        // load next scene (but dont show yet)
         var scene = SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
         scene.allowSceneActivation = false;
 

@@ -52,8 +52,10 @@ public class DayNightCycle : MonoBehaviour
 
     void Update()
     {
-        if (!_timedTransition) return; // event-based transitions only
+        // event-based transitions only
+        if (!_timedTransition) return;
 
+        // the sun does not move during dusk and dawn
         if (_inTransition) return;
 
         _currentTime += Time.deltaTime;
@@ -63,8 +65,10 @@ public class DayNightCycle : MonoBehaviour
 
     bool UpdateDay()
     {
+        // light temperature
         _directionalLight.colorTemperature += _dayColorChange * Time.deltaTime;
 
+        // sun position
         transform.rotation = Quaternion.RotateTowards(
             transform.rotation,
             _dayEndRotation,
@@ -76,6 +80,7 @@ public class DayNightCycle : MonoBehaviour
 
     bool UpdateNight()
     {
+        // light temperature
         _directionalLight.colorTemperature +=
             Time.deltaTime * Random.Range(-_nightColorChange, _nightColorChange);
 

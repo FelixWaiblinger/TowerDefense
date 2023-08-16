@@ -14,3 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartMoney: 100
   StartResearch: 0
+  MusicLevel: 1
+  EffectsLevel: 1
+  Structures:
+  - {fileID: 5893097886290016644, guid: 83a577f04dd4ac349819c9b1e7e5dd46, type: 3}
+  - {fileID: 1851551361424950867, guid: 943248ce502dd1e4f871b5b558b93ed6, type: 3}
+  - {fileID: 8262761240580215811, guid: 2a720dd796d0c28449d2e80b44f0e343, type: 3}

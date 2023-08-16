@@ -8,4 +8,6 @@ public class GameData : ScriptableObject
 
     public float MusicLevel = 1;
     public float EffectsLevel = 1;
+
+    public GameObject[] Structures;
 }

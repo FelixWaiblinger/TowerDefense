@@ -14,7 +14,7 @@ public class FPSHandler : MonoBehaviour
         if (_showFPS) _framesUI.SetActive(true);
     }
 
-    void FixedUpdate()
+    void FixedUpdate() // yes this is intentional
     {
         _FPS.text = $"{(int)(1 / Time.deltaTime)} FPS";
     }

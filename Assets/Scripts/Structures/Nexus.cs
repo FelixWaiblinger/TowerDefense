@@ -3,6 +3,7 @@ using UnityEngine;
 public class Nexus : Tower
 {
     [SerializeField] private VoidEventChannel _loseEvent;
+    [SerializeField] private VoidEventChannel _defendEvent;
     
     void Update()
     {
