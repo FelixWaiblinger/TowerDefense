@@ -131,6 +131,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ec4fb2fb842624cba0f259a093164d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _defendEvent: {fileID: 0}
+  _maxHealth: 15
+  _incomeAmount: 1
+  _incomeRate: 1
 --- !u!65 &1450719787556550462
 BoxCollider:
   m_ObjectHideFlags: 0
