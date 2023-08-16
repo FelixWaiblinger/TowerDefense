@@ -51,9 +51,10 @@ public class CameraTarget : MonoBehaviour
 
     void Zoom(Vector2 direction)
     {
+        Debug.Log(direction.y);
         // zoom in an out
         _transposer.m_CameraDistance = Mathf.Clamp(
-            _transposer.m_CameraDistance - direction.y,
+            _transposer.m_CameraDistance - 0.01f * direction.y,
             _minDistance,
             _maxDistance
         );
