@@ -2,13 +2,19 @@ using UnityEngine;
 
 public class PauseUI : MonoBehaviour
 {
-    [SerializeField] private IntEventChannel _sceneEvent;
+    #region VARIABLE
 
-    [Header("UI elements")]
+    [Header("Game pause")]
+    [Tooltip("Request change to next scene (main menu)")]
+    [SerializeField] private IntEventChannel _sceneEvent;
+    [Tooltip("Canvas to display resume, settings and quit buttons")]
     [SerializeField] private Canvas _canvas;
+    [Tooltip("Canvas to display and change user settings")]
     [SerializeField] private SettingsUI _settings;
 
     private GameObject _openSettings = null;
+
+    #endregion
 
     void Update()
     {
@@ -17,7 +23,7 @@ public class PauseUI : MonoBehaviour
         _canvas.enabled = true; // not ideal to set every frame...
     }
 
-    #region BUTTONS
+    #region BUTTON
 
     public void Resume()
     {

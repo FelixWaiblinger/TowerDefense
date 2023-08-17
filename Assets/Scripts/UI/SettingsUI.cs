@@ -3,11 +3,19 @@ using UnityEngine.UI;
 
 public class SettingsUI : MonoBehaviour
 {
-    [SerializeField] private GameData _gameInfo;
+    #region VARIABLE
 
-    [Header("UI elements")]
+    [Header("Settings")]
+    [Tooltip("Holds information about the start/on-going game and user options")]
+    [SerializeField] private GameData _gameInfo;
+    [Tooltip("Display and change the volume level of music")]
     [SerializeField] private Slider _musicLevel;
+    [Tooltip("Display and change the volume level of sound effects")]
     [SerializeField] private Slider _effectsLevel;
+
+    #endregion
+
+    #region BUTTON
 
     public void Return()
     {
@@ -16,4 +24,6 @@ public class SettingsUI : MonoBehaviour
 
         Destroy(gameObject);
     }
+
+    #endregion
 }

@@ -268,7 +268,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c810175dbadba3e449af437b95e265d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defendEvent: {fileID: 11400000, guid: 08d6fb59ae3cdc44795faa7184b6d236, type: 2}
+  _requestTransitionEvent: {fileID: 11400000, guid: 24f4c9f52b8c922468d07e03bafcbac4,
+    type: 2}
   _buildOptionEvent: {fileID: 11400000, guid: b1fb356d00c2e5146b2613a9332ef4f3, type: 2}
   _dayCount: {fileID: 7501280639741100596}
   _moneyCount: {fileID: 1286528925622151484}

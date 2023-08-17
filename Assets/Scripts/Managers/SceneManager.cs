@@ -4,11 +4,19 @@ using UnityEngine.UI;
 
 public class SceneHandler : MonoBehaviour
 {
+    #region VARIABLE
+
+    [Header("Scene management")]
+    [Tooltip("Request to change current active scene")]
     [SerializeField] private IntEventChannel _sceneEvent;
+    [Tooltip("Canvas to display a loading screen")]
     [SerializeField] private GameObject _loadingScreen;
+    [Tooltip("Show current progress of scene load")]
     [SerializeField] private Image _progressBar;
 
     private float _targetProgress = 0;
+
+    #endregion
 
     #region SETUP
 
@@ -33,12 +41,16 @@ public class SceneHandler : MonoBehaviour
 
     void Update()
     {
+        if (!_loadingScreen.activeSelf) return;
+
         _progressBar.fillAmount = Mathf.MoveTowards(
             _progressBar.fillAmount,
             _targetProgress,
             3 * Time.deltaTime
         );
     }
+
+    #region EVENT
 
     async void LoadScene(int sceneIndex)
     {
@@ -65,4 +77,6 @@ public class SceneHandler : MonoBehaviour
         scene.allowSceneActivation = true;
         _loadingScreen.SetActive(false);
     }
+
+    #endregion
 }

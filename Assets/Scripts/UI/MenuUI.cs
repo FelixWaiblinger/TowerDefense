@@ -2,17 +2,27 @@ using UnityEngine;
 
 public class MenuUI : MonoBehaviour
 {
+    #region VARIABLE
+
+    [Header("Main menu")]
+    [Tooltip("Main canvas holding start, settings and quit button")]
     [SerializeField] private Canvas _canvas;
+    [Tooltip("Canvas to display and change user settings")]
     [SerializeField] private SettingsUI _settings;
+    [Tooltip("Request change to next scene (main game)")]
     [SerializeField] private IntEventChannel _sceneEvent;
 
     private GameObject _openSettings = null;
+
+    #endregion
 
     void Update()
     {
         if (!_canvas.enabled && !_openSettings)
             _canvas.enabled = true;
     }
+
+    #region BUTTON
 
     public void Play()
     {
@@ -34,4 +44,6 @@ public class MenuUI : MonoBehaviour
         // TODO save stuff
         Application.Quit();
     }
+
+    #endregion
 }

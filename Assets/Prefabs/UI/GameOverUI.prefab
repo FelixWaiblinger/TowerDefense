@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 1160696203923148008}
   - component: {fileID: 3812762888030768689}
   m_Layer: 5
-  m_Name: LoseUI
+  m_Name: GameOverUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,56 +1,69 @@
 using UnityEngine;
 
-public abstract class Tower : MonoBehaviour
+public abstract class Tower : Structure
 {
-    [SerializeField] protected EntityUI _status;
+    #region VARIABLE
 
-    [Header("Stats")]
-    [SerializeField] protected int _maxHealth;
+    [Header("Tower")]
+    [Tooltip("Projectile prefab to instantiate")]
+    [SerializeField] protected Projectile _projectile;
+    [Tooltip("Where to instantiate a new projectile")]
+    [SerializeField] protected Transform _projectileStart;
+    [Tooltip("Damage applied on-hit")]
     [SerializeField] protected int _attackDamage;
     [Tooltip("Attacks per second")]
     [SerializeField] protected float _attackRate;
+    [Tooltip("Maximum range to detect enemies")]
     [SerializeField] protected float _attackRange;
 
-    protected int _currentHealth;
-    protected Enemy _currentTarget = null;
-    protected Outline _outline;
+    protected GameObject _currentTarget = null;
+    protected float _attackTimer = 0;
+    
+    #endregion
 
-    protected void Start()
-    {
-        _currentHealth = _maxHealth;
-        _outline = gameObject.GetComponent<Outline>();
-    }
-
-    protected void OnMouseEnter()
-    {
-        _outline.enabled = true;
-    }
-
-    protected void OnMouseExit()
-    {
-        _outline.enabled = false;
-    }
-
-    void FindTarget()
+    protected void FindTarget()
     {
         // find all enemies in range using their layer
-        var structures = Physics.OverlapSphere(transform.position, _attackRange, 11);
+        var enemies = Physics.OverlapSphere(transform.position, _attackRange, 11);
         
-        if (structures.Length == 0) return;
+        if (enemies.Length == 0) return;
         
         // find closest enemy
         float minDistance = _attackRange;
-        foreach (Collider s in structures)
+        foreach (Collider e in enemies)
         {
-            var distance = Vector3.Distance(s.transform.position, transform.position);
+            var distance = Vector3.Distance(e.transform.position, transform.position);
 
             if (distance < minDistance)
             {
                 minDistance = distance;
-                _currentTarget = s.gameObject.GetComponent<Enemy>();
+                _currentTarget = e.gameObject;
             }
         }
     }
 
-    protected abstract void Attack();
+    protected void Attack()
+    {
+        // start attack
+        if (_attackTimer == 0)
+        {
+            CreateProjectile();
+            _attackTimer += Time.deltaTime;
+        }
+        // update timer for next attack
+        else
+        {
+            _attackTimer = _attackTimer >= 1 / _attackRate ? 0 : _attackTimer + Time.deltaTime;
+        }
+    }
+
+    protected void CreateProjectile()
+    {
+        var rotation = Quaternion.LookRotation(
+            _currentTarget.transform.position - _projectileStart.position
+        );
+
+        var projectile = Instantiate(_projectile, _projectileStart.position, rotation);
+        projectile.Init(_currentTarget);
+    }
 }

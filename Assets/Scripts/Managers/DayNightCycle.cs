@@ -3,41 +3,45 @@ using UnityEngine;
 
 public class DayNightCycle : MonoBehaviour
 {
-    [SerializeField] VoidEventChannel _defendEvent;
-    [Tooltip("Day&Night transition smooth or instantaneous")]
-    [SerializeField] bool _smoothTransition = true;
-    [Tooltip("Higher value for faster transition")]
-    [SerializeField] float _smoothness = 0.5f;
-    [Tooltip("Day&Night transition after given time or event-based only")]
-    [SerializeField] bool _timedTransition = true;
-    [Tooltip("Time in seconds until the day ends")]
-    [SerializeField] float _dayTime = 60;
-    [Tooltip("Time in seconds until the night ends")]
-    [SerializeField] float _nightTime = 60;
-    [Tooltip("Shift in color temperature over entire day")]
-    [SerializeField] float _dayColorDelta = 3000;
-    [Tooltip("Random variations in color temperature during the night")]
-    [SerializeField] float _nightColorDelta = 100;
-    
-    Quaternion _dayStartRotation = Quaternion.Euler(50, 120, 0);
-    Quaternion _dayEndRotation = Quaternion.Euler(50, -30, 0);
-    Quaternion _nightStartRotation = Quaternion.Euler(90, 120, 0);
+    #region VARIABLE
 
-    Light _directionalLight;
-    bool _day = true, _inTransition = false;
-    float _dayColor = 5000, _nightColor = 8000;
-    float _currentTime = 0, _dayColorChange, _nightColorChange, _dayRotationChange;
+    [SerializeField] private BoolEventChannel _transitionEvent;
+    [Tooltip("Day&Night transition smooth or instantaneous")]
+    [SerializeField] private bool _smoothTransition = true;
+    [Tooltip("Higher value for faster transition")]
+    [SerializeField] private float _smoothness = 0.5f;
+    [Tooltip("Day&Night transition after given time or event-based only")]
+    [SerializeField] private bool _timedTransition = true;
+    [Tooltip("Time in seconds until the day ends")]
+    [SerializeField] private float _dayTime = 60;
+    [Tooltip("Time in seconds until the night ends")]
+    [SerializeField] private float _nightTime = 60;
+    [Tooltip("Shift in color temperature over entire day")]
+    [SerializeField] private float _dayColorDelta = 3000;
+    [Tooltip("Random variations in color temperature during the night")]
+    [SerializeField] private float _nightColorDelta = 100;
+    
+    private Quaternion _dayStartRotation = Quaternion.Euler(50, 120, 0);
+    private Quaternion _dayEndRotation = Quaternion.Euler(50, -30, 0);
+    private Quaternion _nightStartRotation = Quaternion.Euler(90, 120, 0);
+
+    private Light _directionalLight;
+    private bool _isDay = true, _inTransition = false;
+    private float _dayColor = 5000, _nightColor = 8000, _currentTime = 0;
+    private float _dayColorChange, _nightColorChange, _dayRotationChange;
+
+    #endregion
 
     #region SETUP
 
     void OnEnable()
     {
-        _defendEvent.OnVoidEventRaised += Transition;
+        _transitionEvent.OnBoolEventRaised += Transition;
     }
 
     void OnDisable()
     {
-        _defendEvent.OnVoidEventRaised -= Transition;
+        _transitionEvent.OnBoolEventRaised -= Transition;
     }
 
     void Start()
@@ -50,6 +54,8 @@ public class DayNightCycle : MonoBehaviour
 
     #endregion
 
+    #region UPDATE
+
     void Update()
     {
         // event-based transitions only
@@ -60,7 +66,7 @@ public class DayNightCycle : MonoBehaviour
 
         _currentTime += Time.deltaTime;
 
-        if (_day ? UpdateDay() : UpdateNight()) Transition();
+        if (_isDay ? UpdateDay() : UpdateNight()) Transition(!_isDay);
     }
 
     bool UpdateDay()
@@ -87,16 +93,24 @@ public class DayNightCycle : MonoBehaviour
         return _currentTime > _nightTime;
     }
 
-    void Transition()
+    #endregion
+
+    #region EVENT
+
+    void Transition(bool isDay)
     {
         _currentTime = 0;
-        _day = !_day;
-        _directionalLight.colorTemperature = _day ? _dayColor : _nightColor;
-        var targetRot = _day ? _dayStartRotation : _nightStartRotation;
+        _isDay = isDay;
+        _directionalLight.colorTemperature = _isDay ? _dayColor : _nightColor;
+        var targetRot = _isDay ? _dayStartRotation : _nightStartRotation;
 
         if (_smoothTransition) StartCoroutine(SmoothTransition(targetRot));
         else transform.rotation = targetRot;
     }
+
+    #endregion
+
+    #region COROUTINE
 
     IEnumerator SmoothTransition(Quaternion targetRot)
     {
@@ -115,4 +129,6 @@ public class DayNightCycle : MonoBehaviour
 
         _inTransition = false;
     }
+    
+    #endregion
 }
