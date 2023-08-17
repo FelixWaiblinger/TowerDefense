@@ -6,7 +6,7 @@ public class Nexus : Tower
 
     [Header("Nexus")]
     [Tooltip("Notification to end the game")]
-    [SerializeField] private VoidEventChannel _gameOverEvent;
+    [SerializeField] private BoolEventChannel _winEvent;
 
     #endregion
     
@@ -19,9 +19,9 @@ public class Nexus : Tower
 
     protected override void OnDestruction()
     {
-        if (_currentHealth > 0)
+        if (_currentHealth <= 0)
         {
-            _gameOverEvent.RaiseVoidEvent();
+            _winEvent.RaiseBoolEvent(false);
             // play animation
             Destroy(gameObject);
         }

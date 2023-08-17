@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _buildCost: 15
   _maxHealth: 15
+  _status: {fileID: 6693868809497901017}
   _transitionEvent: {fileID: 11400000, guid: fa7cae83c82af9a4d81e7931ccc1f9da, type: 2}
   _moneyEvent: {fileID: 11400000, guid: 012cd237537486f498326c6e1a6d1043, type: 2}
   _incomeAmount: 15
@@ -350,3 +351,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8406985299565559623}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6693868809497901017 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2904534379361028254, guid: 69152c4a102bab9489f8b625cedd0e6f,
+    type: 3}
+  m_PrefabInstance: {fileID: 8406985299565559623}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aae42a595f316124d94dfe0141f47a1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

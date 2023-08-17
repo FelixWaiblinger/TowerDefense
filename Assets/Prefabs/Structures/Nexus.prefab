@@ -172,8 +172,7 @@ MonoBehaviour:
   _attackDamage: 10
   _attackRate: 1
   _attackRange: 20
-  _loseEvent: {fileID: 11400000, guid: ac39e4556d37d574b802ffaa3d2d1c9b, type: 2}
-  _transitionEvent: {fileID: 0}
+  _winEvent: {fileID: 11400000, guid: 89eb736db5dec2d4caf552a9953ab86d, type: 2}
 --- !u!65 &8001948405616300632
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -39,7 +39,7 @@ public abstract class Structure : MonoBehaviour
 
     protected virtual void OnDestruction()
     {
-        if (_currentHealth > 0)
+        if (_currentHealth <= 0)
         {
             // play animation
             Destroy(gameObject);
