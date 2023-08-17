@@ -83,6 +83,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8245004704792630550
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5962112501022414620}
+  m_Layer: 10
+  m_Name: ProjectileStart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5962112501022414620
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8245004704792630550}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1373813575162732702}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8670541091232257120
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,6 +148,7 @@ Transform:
   m_Children:
   - {fileID: 7598967950134389039}
   - {fileID: 2520685788035511012}
+  - {fileID: 5962112501022414620}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4152366523083575616
@@ -131,12 +163,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90b46f802863e3e4280df0d4538c374c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _status: {fileID: 5108715822834925907}
+  _buildCost: 0
   _maxHealth: 100
+  _status: {fileID: 5108715822834925907}
+  _projectile: {fileID: 1218599356235286766, guid: c50be27fbbc383144af0ce4cb6f7dccf,
+    type: 3}
+  _projectileStart: {fileID: 5962112501022414620}
   _attackDamage: 10
   _attackRate: 1
   _attackRange: 20
   _loseEvent: {fileID: 11400000, guid: ac39e4556d37d574b802ffaa3d2d1c9b, type: 2}
+  _transitionEvent: {fileID: 0}
 --- !u!65 &8001948405616300632
 BoxCollider:
   m_ObjectHideFlags: 0

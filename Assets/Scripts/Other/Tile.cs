@@ -2,9 +2,13 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
+    #region VARIABLE
+
     private Transform _sceneStructures;
     private GameObject _structure;
     public bool Occupied { get; private set; } = false;
+
+    #endregion
 
     void Start()
     {

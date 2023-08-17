@@ -5,6 +5,8 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "InputReader", menuName = "Game/Input Reader")]
 public class InputReader : ScriptableObject, GameInput.IGameControlsActions
 {
+	#region VARIABLE
+
 	public static UnityAction<Vector2> moveEvent;
 	public static UnityAction<Vector2> movePosEvent;
 	public static UnityAction<Vector2> moveDeltaEvent;
@@ -17,6 +19,8 @@ public class InputReader : ScriptableObject, GameInput.IGameControlsActions
 	public static UnityAction pauseEvent;
 
 	private GameInput gameInput;
+
+	#endregion
 
 	#region SETUP
 

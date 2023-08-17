@@ -3,11 +3,18 @@ using UnityEngine.UI;
 
 public class EntityUI : MonoBehaviour
 {
+    #region VARIABLE
+
+    [Header("Status")]
+    [Tooltip("Current amount of health on this instance")]
     [SerializeField] private Image _healthBar;
-    [SerializeField] private float _speed = 1;
+    [Tooltip("Change healthbar smoothly")]
+    [SerializeField] private float _smoothness = 1;
 
     private float _targetRatio = 1;
     private Camera _camera;
+
+    #endregion
 
     void Start()
     {
@@ -28,7 +35,7 @@ public class EntityUI : MonoBehaviour
         _healthBar.fillAmount = Mathf.MoveTowards(
             _healthBar.fillAmount,
             _targetRatio,
-            _speed * Time.deltaTime
+            _smoothness * Time.deltaTime
         );
     }
 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BlueEnemy : Enemy
 {
-    void FixedUpdate()
+    void FixedUpdate() // intentional
     {
         FindLocalTarget();
     }

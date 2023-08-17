@@ -4,14 +4,8 @@ public class Ballista : Tower
 {
     void Update()
     {
-        if (_currentHealth <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
+        OnDestruction();
 
-    protected override void Attack()
-    {
-
+        if (_currentTarget) Attack();
     }
 }

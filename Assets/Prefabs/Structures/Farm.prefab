@@ -47,10 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ec4fb2fb842624cba0f259a093164d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defendEvent: {fileID: 0}
+  _buildCost: 15
   _maxHealth: 15
-  _incomeAmount: 1
-  _incomeRate: 1
+  _transitionEvent: {fileID: 11400000, guid: fa7cae83c82af9a4d81e7931ccc1f9da, type: 2}
+  _moneyEvent: {fileID: 11400000, guid: 012cd237537486f498326c6e1a6d1043, type: 2}
+  _incomeAmount: 15
 --- !u!114 &5468811800647205779
 MonoBehaviour:
   m_ObjectHideFlags: 0

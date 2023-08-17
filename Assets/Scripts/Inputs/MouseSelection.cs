@@ -2,13 +2,20 @@ using UnityEngine;
 
 public class MouseSelection : MonoBehaviour
 {
+    #region VARIABLE
+
+    [Header("Object selection")]
+    [Tooltip("UI selection of structure to build")]
     [SerializeField] private IntEventChannel _buildOptionEvent;
+    [Tooltip("Holds information about the start/on-going game and user options")]
     [SerializeField] private GameData _gameInfo;
 
     private Camera _camera;
     private Vector3 _mousePosition;
     private GameObject _selectedObject = null;
     private GameObject _selectedStructure = null;
+
+    #endregion
 
     #region SETUP
 
@@ -33,6 +40,8 @@ public class MouseSelection : MonoBehaviour
     }
 
     #endregion
+
+    #region EVENT
 
     void SelectObject()
     {
@@ -75,4 +84,6 @@ public class MouseSelection : MonoBehaviour
         // toggle selection on button press
         _selectedStructure = _selectedObject != structure ? structure : null;
     }
+
+    #endregion
 }

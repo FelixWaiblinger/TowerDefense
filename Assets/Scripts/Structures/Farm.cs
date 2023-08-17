@@ -1,36 +1,44 @@
 using UnityEngine;
 
-public class Farm : MonoBehaviour
+public class Farm : Structure
 {
-    [SerializeField] private VoidEventChannel _defendEvent;
-    [SerializeField] private int _maxHealth;
+    #region VARIABLE
+
+    [Header("Farm")]
+    [Tooltip("Notification of a change in the day/night cycle")]
+    [SerializeField] private BoolEventChannel _transitionEvent;
+    [Tooltip("Sending the generated income to a GameManager")]
+    [SerializeField] private IntEventChannel _moneyEvent;
+    [Tooltip("Amount of money this farm generates per day")]
     [SerializeField] private int _incomeAmount;
-    [SerializeField] private int _incomeRate;
-    
-    private int _currentHealth;
-    protected Outline _outline;
 
-    void Awake()
+    #endregion
+
+    #region SETUP
+
+    void OnEnable()
     {
-        _currentHealth = _maxHealth;
-        _outline = gameObject.GetComponentInChildren<Outline>();
+        _transitionEvent.OnBoolEventRaised += GenerateIncome;
     }
 
-    void OnMouseEnter()
+    void OnDisable()
     {
-        _outline.enabled = true;
+        _transitionEvent.OnBoolEventRaised -= GenerateIncome;
     }
 
-    void OnMouseExit()
-    {
-        _outline.enabled = false;
-    }
+    #endregion
 
     void Update()
     {
-        if (_currentHealth <= 0)
-        {
-            Destroy(gameObject);
-        }
+        OnDestruction();
     }
+
+    #region EVENT
+
+    void GenerateIncome(bool isDay)
+    {
+        if (isDay) _moneyEvent.RaiseIntEvent(_incomeAmount);
+    }
+
+    #endregion
 }

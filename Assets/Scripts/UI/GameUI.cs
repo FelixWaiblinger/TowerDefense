@@ -3,25 +3,35 @@ using TMPro;
 
 public class GameUI : MonoBehaviour
 {
-    [SerializeField] private VoidEventChannel _defendEvent;
+    #region VARIABLE
+    
+    [Header("Events")]
+    [Tooltip("Request the next step in the day/night cycle")]
+    [SerializeField] private VoidEventChannel _requestTransitionEvent;
+    [Tooltip("Select a build option from the UI")]
     [SerializeField] private IntEventChannel _buildOptionEvent;
 
     [Header("Counters")]
+    [Tooltip("Display current day")]
     [SerializeField] private TMP_Text _dayCount;
+    [Tooltip("Display current amount of money")]
     [SerializeField] private TMP_Text _moneyCount;
+    [Tooltip("Display current amount of research")]
     [SerializeField] private TMP_Text _researchCount;
-    private int _day = 1;
 
     [Header("Build menu")]
+    [Tooltip("UI element containing all build options")]
     [SerializeField] private GameObject _buildMenu;
 
+    private int _day = 1;
+
+    #endregion
 
     #region SETUP
 
     void OnEnable()
     {
         InputReader.buildEvent += ToggleBuildMenu;
-        _defendEvent.OnVoidEventRaised += () => _dayCount.text = $"Day\n{++_day}";
     }
 
     void OnDisable()
@@ -48,11 +58,11 @@ public class GameUI : MonoBehaviour
         _researchCount.text = amount.ToString();
     }
 
-    #region BUTTONS
+    #region BUTTON
 
     public void EndTurn()
     {
-        _defendEvent.RaiseVoidEvent();
+        _requestTransitionEvent.RaiseVoidEvent();
     }
 
     public void ToggleBuildMenu()
