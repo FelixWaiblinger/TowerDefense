@@ -46,20 +46,11 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""MoveDelta"",
-                    ""type"": ""Value"",
-                    ""id"": ""49d175b4-168d-4df6-a01f-82c9b2d1ba42"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""Zoom"",
                     ""type"": ""Value"",
                     ""id"": ""c0558c78-c5bf-4e2c-bd03-314916267ca9"",
                     ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
+                    ""processors"": ""NormalizeVector2"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
@@ -67,15 +58,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""name"": ""Select"",
                     ""type"": ""Button"",
                     ""id"": ""33db18c2-f2b8-4544-8131-35c0ac5ef863"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Drag"",
-                    ""type"": ""Button"",
-                    ""id"": ""d88e6224-4fe4-4613-b0d2-fe0accd59de2"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -100,7 +82,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Defend"",
+                    ""name"": ""Transition"",
                     ""type"": ""Button"",
                     ""id"": ""25984f56-390c-42d8-8bb8-5d9bb74bd431"",
                     ""expectedControlType"": ""Button"",
@@ -126,18 +108,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""MouseKeyboard"",
-                    ""action"": ""Defend"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1c6e5531-92ed-42ce-afbb-e2eef92b5dd4"",
-                    ""path"": ""<Mouse>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""MouseKeyboard"",
-                    ""action"": ""MoveDelta"",
+                    ""action"": ""Transition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -160,17 +131,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""MouseKeyboard"",
                     ""action"": ""Select"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f163e7f1-70a9-4cac-90c0-37fc9b38bbba"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""Hold"",
-                    ""processors"": """",
-                    ""groups"": ""MouseKeyboard"",
-                    ""action"": ""Drag"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -299,13 +259,11 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_GameControls = asset.FindActionMap("GameControls", throwIfNotFound: true);
         m_GameControls_Move = m_GameControls.FindAction("Move", throwIfNotFound: true);
         m_GameControls_MovePos = m_GameControls.FindAction("MovePos", throwIfNotFound: true);
-        m_GameControls_MoveDelta = m_GameControls.FindAction("MoveDelta", throwIfNotFound: true);
         m_GameControls_Zoom = m_GameControls.FindAction("Zoom", throwIfNotFound: true);
         m_GameControls_Select = m_GameControls.FindAction("Select", throwIfNotFound: true);
-        m_GameControls_Drag = m_GameControls.FindAction("Drag", throwIfNotFound: true);
         m_GameControls_Cancel = m_GameControls.FindAction("Cancel", throwIfNotFound: true);
         m_GameControls_Build = m_GameControls.FindAction("Build", throwIfNotFound: true);
-        m_GameControls_Defend = m_GameControls.FindAction("Defend", throwIfNotFound: true);
+        m_GameControls_Transition = m_GameControls.FindAction("Transition", throwIfNotFound: true);
         m_GameControls_Pause = m_GameControls.FindAction("Pause", throwIfNotFound: true);
     }
 
@@ -370,13 +328,11 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private List<IGameControlsActions> m_GameControlsActionsCallbackInterfaces = new List<IGameControlsActions>();
     private readonly InputAction m_GameControls_Move;
     private readonly InputAction m_GameControls_MovePos;
-    private readonly InputAction m_GameControls_MoveDelta;
     private readonly InputAction m_GameControls_Zoom;
     private readonly InputAction m_GameControls_Select;
-    private readonly InputAction m_GameControls_Drag;
     private readonly InputAction m_GameControls_Cancel;
     private readonly InputAction m_GameControls_Build;
-    private readonly InputAction m_GameControls_Defend;
+    private readonly InputAction m_GameControls_Transition;
     private readonly InputAction m_GameControls_Pause;
     public struct GameControlsActions
     {
@@ -384,13 +340,11 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public GameControlsActions(@GameInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_GameControls_Move;
         public InputAction @MovePos => m_Wrapper.m_GameControls_MovePos;
-        public InputAction @MoveDelta => m_Wrapper.m_GameControls_MoveDelta;
         public InputAction @Zoom => m_Wrapper.m_GameControls_Zoom;
         public InputAction @Select => m_Wrapper.m_GameControls_Select;
-        public InputAction @Drag => m_Wrapper.m_GameControls_Drag;
         public InputAction @Cancel => m_Wrapper.m_GameControls_Cancel;
         public InputAction @Build => m_Wrapper.m_GameControls_Build;
-        public InputAction @Defend => m_Wrapper.m_GameControls_Defend;
+        public InputAction @Transition => m_Wrapper.m_GameControls_Transition;
         public InputAction @Pause => m_Wrapper.m_GameControls_Pause;
         public InputActionMap Get() { return m_Wrapper.m_GameControls; }
         public void Enable() { Get().Enable(); }
@@ -407,27 +361,21 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @MovePos.started += instance.OnMovePos;
             @MovePos.performed += instance.OnMovePos;
             @MovePos.canceled += instance.OnMovePos;
-            @MoveDelta.started += instance.OnMoveDelta;
-            @MoveDelta.performed += instance.OnMoveDelta;
-            @MoveDelta.canceled += instance.OnMoveDelta;
             @Zoom.started += instance.OnZoom;
             @Zoom.performed += instance.OnZoom;
             @Zoom.canceled += instance.OnZoom;
             @Select.started += instance.OnSelect;
             @Select.performed += instance.OnSelect;
             @Select.canceled += instance.OnSelect;
-            @Drag.started += instance.OnDrag;
-            @Drag.performed += instance.OnDrag;
-            @Drag.canceled += instance.OnDrag;
             @Cancel.started += instance.OnCancel;
             @Cancel.performed += instance.OnCancel;
             @Cancel.canceled += instance.OnCancel;
             @Build.started += instance.OnBuild;
             @Build.performed += instance.OnBuild;
             @Build.canceled += instance.OnBuild;
-            @Defend.started += instance.OnDefend;
-            @Defend.performed += instance.OnDefend;
-            @Defend.canceled += instance.OnDefend;
+            @Transition.started += instance.OnTransition;
+            @Transition.performed += instance.OnTransition;
+            @Transition.canceled += instance.OnTransition;
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
@@ -441,27 +389,21 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @MovePos.started -= instance.OnMovePos;
             @MovePos.performed -= instance.OnMovePos;
             @MovePos.canceled -= instance.OnMovePos;
-            @MoveDelta.started -= instance.OnMoveDelta;
-            @MoveDelta.performed -= instance.OnMoveDelta;
-            @MoveDelta.canceled -= instance.OnMoveDelta;
             @Zoom.started -= instance.OnZoom;
             @Zoom.performed -= instance.OnZoom;
             @Zoom.canceled -= instance.OnZoom;
             @Select.started -= instance.OnSelect;
             @Select.performed -= instance.OnSelect;
             @Select.canceled -= instance.OnSelect;
-            @Drag.started -= instance.OnDrag;
-            @Drag.performed -= instance.OnDrag;
-            @Drag.canceled -= instance.OnDrag;
             @Cancel.started -= instance.OnCancel;
             @Cancel.performed -= instance.OnCancel;
             @Cancel.canceled -= instance.OnCancel;
             @Build.started -= instance.OnBuild;
             @Build.performed -= instance.OnBuild;
             @Build.canceled -= instance.OnBuild;
-            @Defend.started -= instance.OnDefend;
-            @Defend.performed -= instance.OnDefend;
-            @Defend.canceled -= instance.OnDefend;
+            @Transition.started -= instance.OnTransition;
+            @Transition.performed -= instance.OnTransition;
+            @Transition.canceled -= instance.OnTransition;
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
@@ -495,13 +437,11 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnMovePos(InputAction.CallbackContext context);
-        void OnMoveDelta(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
-        void OnDrag(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
         void OnBuild(InputAction.CallbackContext context);
-        void OnDefend(InputAction.CallbackContext context);
+        void OnTransition(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
     }
 }

@@ -36,6 +36,7 @@ public class DayNightCycle : MonoBehaviour
 
     void OnEnable()
     {
+        //InputReader.transitionEvent += Transition; // TODO requires bool
         _transitionEvent.OnBoolEventRaised += Transition;
     }
 

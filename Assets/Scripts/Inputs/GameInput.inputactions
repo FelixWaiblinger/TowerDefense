@@ -24,20 +24,11 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "MoveDelta",
-                    "type": "Value",
-                    "id": "49d175b4-168d-4df6-a01f-82c9b2d1ba42",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Zoom",
                     "type": "Value",
                     "id": "c0558c78-c5bf-4e2c-bd03-314916267ca9",
                     "expectedControlType": "Vector2",
-                    "processors": "",
+                    "processors": "NormalizeVector2",
                     "interactions": "",
                     "initialStateCheck": true
                 },
@@ -45,15 +36,6 @@
                     "name": "Select",
                     "type": "Button",
                     "id": "33db18c2-f2b8-4544-8131-35c0ac5ef863",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Drag",
-                    "type": "Button",
-                    "id": "d88e6224-4fe4-4613-b0d2-fe0accd59de2",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -78,7 +60,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Defend",
+                    "name": "Transition",
                     "type": "Button",
                     "id": "25984f56-390c-42d8-8bb8-5d9bb74bd431",
                     "expectedControlType": "Button",
@@ -104,18 +86,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "MouseKeyboard",
-                    "action": "Defend",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1c6e5531-92ed-42ce-afbb-e2eef92b5dd4",
-                    "path": "<Mouse>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "MouseKeyboard",
-                    "action": "MoveDelta",
+                    "action": "Transition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -138,17 +109,6 @@
                     "processors": "",
                     "groups": "MouseKeyboard",
                     "action": "Select",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f163e7f1-70a9-4cac-90c0-37fc9b38bbba",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "Hold",
-                    "processors": "",
-                    "groups": "MouseKeyboard",
-                    "action": "Drag",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
