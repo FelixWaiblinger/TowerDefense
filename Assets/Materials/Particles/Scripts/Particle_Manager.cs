@@ -3,41 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Particle_Manager : MonoBehaviour {
-    public float _speed = 15f;
-    public Vector3 _rotationOffset = new Vector3(0, 90, 0);
-    public Vector3 _currentPosition = new Vector3(-8.77f, 3.06f, 6.43f);
+
+    public float _speed = 0f;
+
+    public bool ShouldUseSpeedvalue = false;
+
+    public float _customGravityScale;
 
     private Rigidbody _rb;
 
+    public GameObject boom;
     public GameObject[] Detachables;
-
-    [Tooltip("Only for testing Purposes")]
-    public GameObject selfPrefab;
 
     private void Start() {
         _rb = GetComponent<Rigidbody>();
         _rb.constraints = RigidbodyConstraints.None;
     }
     void FixedUpdate() {
-        if (_speed != 0) {
+
+        _rb.useGravity = !ShouldUseSpeedvalue;
+
+        if (ShouldUseSpeedvalue && _speed != 0) {
             _rb.velocity = transform.forward * _speed;
-            //transform.position += transform.forward * (speed * Time.deltaTime);
+        }
+
+        if (_rb.useGravity) {
+            Vector3 customGravity = Physics.gravity * _customGravityScale;
+            _rb.AddForce(customGravity, ForceMode.Acceleration);
 
         }
     }
-    private void OnCollisionEnter(Collision collision) {
-        _rb.constraints = RigidbodyConstraints.FreezeAll;
-        //_speed = 0;
 
-        //Removing trail from the projectile on cillision enter or smooth removing. Detached elements must have "AutoDestroying script"
-        /*foreach (var detachedPrefab in Detachables) {
-            if (detachedPrefab != null) {
-                detachedPrefab.transform.parent = null;
-                Destroy(detachedPrefab, 1);
-            }
-        }*/
+    private void OnCollisionEnter(Collision collision) {
+
+        _rb.constraints = RigidbodyConstraints.FreezeAll;
+
+        Vector3 currentPosition = this.transform.position;
+
         //Destroy projectile on collision
-        Instantiate(selfPrefab, _currentPosition, Quaternion.Euler(0, 90, 0));
+        Instantiate(boom, currentPosition, Quaternion.Euler(0,0,0));
         Destroy(gameObject);
 
 
