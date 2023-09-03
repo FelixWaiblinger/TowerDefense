@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6752ac3c8522c6b418bd9383d4ac1cb3, type: 3}
-  m_Name: SpawnEvent
+  m_Name: SpawnerEvent
   m_EditorClassIdentifier: 

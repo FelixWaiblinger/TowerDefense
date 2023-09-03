@@ -20,6 +20,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float _moveSpeed;
 
     protected int _currentHealth;
+    protected float _attackTimer;
     protected Transform _globalTarget, _localTarget = null;
     protected Outline _outline;
 
@@ -46,10 +47,42 @@ public abstract class Enemy : MonoBehaviour
 
     #endregion
 
+    protected void FixedUpdate() // intentional
+    {
+        FindLocalTarget();
+    }
+
+    protected void Update()
+    {
+        var target = _localTarget ? _localTarget : _globalTarget;
+        if (!target) return;
+
+        var distance = Vector3.Distance(target.transform.position, transform.position);
+
+        if (distance < _attackRange)
+        {
+            Attack();
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                _localTarget == null ? _globalTarget.position : _localTarget.position,
+                Time.deltaTime * _moveSpeed
+            );
+
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation,
+                _localTarget == null ? _globalTarget.rotation : _localTarget.rotation,
+                1
+            );
+        }
+    }
+
     protected void FindLocalTarget()
     {
         // find all enemies in range using their layer
-        var structures = Physics.OverlapSphere(transform.position, _attackRange, 10); // player layer
+        var structures = Physics.OverlapSphere(transform.position, _attackRange * 2, 1<<10); // player layer
         
         if (structures.Length == 0) return;
 
@@ -72,5 +105,17 @@ public abstract class Enemy : MonoBehaviour
     public void TakeDamage(int amount)
     {
         _currentHealth -= amount;
+
+        if (_currentHealth != _maxHealth)
+        {
+            _status.gameObject.SetActive(true);
+            _status.UpdateHealth(_currentHealth / (float)_maxHealth);
+        }
+
+        if (_currentHealth <= 0)
+        {
+            // TODO death animation
+            Destroy(gameObject);
+        }
     }
 }

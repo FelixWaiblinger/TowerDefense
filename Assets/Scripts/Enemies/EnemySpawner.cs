@@ -6,7 +6,9 @@ public class EnemySpawner : MonoBehaviour
 
     [Header("Spawning behaviour")]
     [Tooltip("Trigger spawning the next wave of enemies")]
-    [SerializeField] private VoidEventChannel _spawnEvent;
+    [SerializeField] private BoolEventChannel _transitionEvent;
+    [Tooltip("Notification of the death of all enemies spawned by this spawner")]
+    [SerializeField] private VoidEventChannel _spawnerEvent;
     [Tooltip("Enemy prefab to instantiate")]
     [SerializeField] private Enemy _enemyType;
     [Tooltip("Spawn all enemies immediately or over time")]
@@ -28,18 +30,25 @@ public class EnemySpawner : MonoBehaviour
 
     void OnEnable()
     {
-        _spawnEvent.OnVoidEventRaised += SpawnEnemies;
+        _transitionEvent.OnBoolEventRaised += SpawnEnemies;
     }
 
     void OnDisable()
     {
-        _spawnEvent.OnVoidEventRaised -= SpawnEnemies;
+        _transitionEvent.OnBoolEventRaised -= SpawnEnemies;
     }
 
     #endregion
 
     void Update()
     {
+        if (_spawnCounter == _spawnAmount &&
+            transform.childCount == 1)
+        {
+            _spawnerEvent.RaiseVoidEvent();
+            _spawnCounter = 0;
+        }
+
         if (!_spawn) return;
 
         if (_spawnCounter < _spawnAmount)
@@ -50,13 +59,16 @@ public class EnemySpawner : MonoBehaviour
             {
                 CreateEnemy();
                 _currentTime = 0;
+                _spawnCounter++;
             }
         }
         else _spawn = false;
     }
 
-    void SpawnEnemies()
+    void SpawnEnemies(bool isDay)
     {
+        if (isDay) return;
+        
         _currentTime = 0;
         _spawnCounter = 0;
 
@@ -66,6 +78,8 @@ public class EnemySpawner : MonoBehaviour
             {
                 CreateEnemy();
             }
+
+            _spawnCounter = _spawnAmount;
         }
         else _spawn = true;
     }
