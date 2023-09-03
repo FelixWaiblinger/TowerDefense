@@ -123,9 +123,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1373813575162732702}
-  - component: {fileID: 4152366523083575616}
+  - component: {fileID: 1063302987703239610}
   - component: {fileID: 8001948405616300632}
   - component: {fileID: 8646980837186715269}
+  - component: {fileID: 4152366523083575616}
   m_Layer: 10
   m_Name: Nexus
   m_TagString: Nexus
@@ -151,28 +152,33 @@ Transform:
   - {fileID: 5962112501022414620}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4152366523083575616
-MonoBehaviour:
+--- !u!54 &1063302987703239610
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8670541091232257120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90b46f802863e3e4280df0d4538c374c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _buildCost: 0
-  _maxHealth: 100
-  _status: {fileID: 5108715822834925907}
-  _projectile: {fileID: 1218599356235286766, guid: c50be27fbbc383144af0ce4cb6f7dccf,
-    type: 3}
-  _projectileStart: {fileID: 5962112501022414620}
-  _attackDamage: 10
-  _attackRate: 1
-  _attackRange: 20
-  _winEvent: {fileID: 11400000, guid: 89eb736db5dec2d4caf552a9953ab86d, type: 2}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!65 &8001948405616300632
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -212,6 +218,28 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &4152366523083575616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8670541091232257120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b46f802863e3e4280df0d4538c374c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buildCost: 0
+  _maxHealth: 100
+  _status: {fileID: 5108715822834925907}
+  _projectile: {fileID: 1218599356235286766, guid: c50be27fbbc383144af0ce4cb6f7dccf,
+    type: 3}
+  _projectileStart: {fileID: 5962112501022414620}
+  _attackDamage: 10
+  _attackRate: 1
+  _attackRange: 20
+  _winEvent: {fileID: 11400000, guid: 89eb736db5dec2d4caf552a9953ab86d, type: 2}
 --- !u!1001 &7974528417524025805
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -249,4 +249,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 1570780968960802558}
-  _speed: 1
+  _smoothness: 0.5

@@ -10,20 +10,8 @@ public class Nexus : Tower
 
     #endregion
     
-    void Update()
+    void OnDestroy()
     {
-        OnDestruction();
-
-        if (_currentTarget) Attack();
-    }
-
-    protected override void OnDestruction()
-    {
-        if (_currentHealth <= 0)
-        {
-            _winEvent.RaiseBoolEvent(false);
-            // play animation
-            Destroy(gameObject);
-        }
+        _winEvent.RaiseBoolEvent(false);
     }
 }

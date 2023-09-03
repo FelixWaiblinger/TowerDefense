@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -15,6 +16,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private IntEventChannel _researchEvent;
     [Tooltip("Trigger the end of a game")]
     [SerializeField] private BoolEventChannel _winEvent;
+    [Tooltip("Notification when all enemies of a spawner have been killed")]
+    [SerializeField] private VoidEventChannel _spawnerEvent;
 
     [Header("UI")]
     [Tooltip("Canvas to display turn, resources, build options, ...")]
@@ -30,7 +33,13 @@ public class GameManager : MonoBehaviour
     [Tooltip("Holds information about acquired upgrades")]
     [SerializeField] private UpgradeData _upgrades;
 
+    [Header("Enemies")]
+    [Tooltip("Dynamically updated list of enemy spawners")]
+    [SerializeField] private List<EnemySpawner> _spawners;
+
     private bool _isDay = true;
+    private int _day = 1;
+    private int _spawnersStopped = 0;
     private int _money;
     private int _research;
 
@@ -40,18 +49,20 @@ public class GameManager : MonoBehaviour
 
     void OnEnable()
     {
-        _requestTransitionEvent.OnVoidEventRaised += EndTurn;
+        _requestTransitionEvent.OnVoidEventRaised += StartFight;
         _moneyEvent.OnIntEventRaised += HandleMoney;
         _researchEvent.OnIntEventRaised += HandleResearch;
         _winEvent.OnBoolEventRaised += GameOver;
+        _spawnerEvent.OnVoidEventRaised += HandleEnemies;
     }
 
     void OnDisable()
     {
-        _requestTransitionEvent.OnVoidEventRaised -= EndTurn;
+        _requestTransitionEvent.OnVoidEventRaised -= StartFight;
         _moneyEvent.OnIntEventRaised -= HandleMoney;
         _researchEvent.OnIntEventRaised -= HandleResearch;
         _winEvent.OnBoolEventRaised -= GameOver;
+        _spawnerEvent.OnVoidEventRaised -= HandleEnemies;
     }
 
     void Start()
@@ -62,24 +73,66 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    void Update()
+    void EndTurn()
     {
-        if (_isDay)
-        {
+        _isDay = !_isDay;
+        _spawnersStopped = 0;
+        _transitionEvent.RaiseBoolEvent(_isDay);
+    }
 
+    void CreateSpawner(int difficulty)
+    {
+        var index = Random.Range(0, difficulty);
+        // TODO find better random positions
+        var position = new Vector3(
+            Random.Range(0f, 1f) > 0.5 ? 20 : -20,
+            0,
+            Random.Range(0f, 1f) > 0.5 ? 20 : -20
+        );
+        var rotation = Quaternion.LookRotation(-position);
+
+        _spawners.Add(Instantiate(_gameInfo.EnemyTypes[index], position, rotation));
+    }
+
+    void IncreaseDifficulty()
+    {
+        int enemyTypes = 1;
+        int newSpawners = 1;
+
+        switch (_day)
+        {
+            case <4:
+                Debug.Log("Easy");
+                break;
+
+            case <7:
+                Debug.Log("Medium");
+                newSpawners = 2;
+                enemyTypes = 5;
+                break;
+
+            case <10:
+                Debug.Log("Hard");
+                newSpawners = 3;
+                enemyTypes = _gameInfo.EnemyTypes.Length - 1;
+                break;
         }
-        else
-        {
 
+        for (int i = 0; i < newSpawners; i++)
+        {
+            CreateSpawner(enemyTypes);
         }
     }
 
     #region EVENT
 
-    void EndTurn()
+    void StartFight()
     {
-        _isDay = !_isDay;
-        _transitionEvent.RaiseBoolEvent(_isDay);
+        if (!_isDay) return;
+
+        IncreaseDifficulty();
+
+        EndTurn();
     }
 
     void HandleMoney(int amount)
@@ -99,6 +152,17 @@ public class GameManager : MonoBehaviour
         {
             _research += amount;
             _HUD.UpdateResearch(_research);
+        }
+    }
+
+    void HandleEnemies()
+    {
+        _spawnersStopped++;
+
+        if (_spawnersStopped == _spawners.Count)
+        {
+            _HUD.UpdateDay(++_day);
+            EndTurn();
         }
     }
 

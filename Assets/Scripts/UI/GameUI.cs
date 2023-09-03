@@ -23,8 +23,6 @@ public class GameUI : MonoBehaviour
     [Tooltip("UI element containing all build options")]
     [SerializeField] private GameObject _buildMenu;
 
-    private int _day = 1;
-
     #endregion
 
     #region SETUP
@@ -41,12 +39,17 @@ public class GameUI : MonoBehaviour
 
     void Start()
     {
-        _dayCount.text = $"Day\n{_day}";
+        _dayCount.text = "Day\n1";
         _moneyCount.text = "100";
         _researchCount.text = "0";
     }
 
     #endregion
+
+    public void UpdateDay(int day)
+    {
+        _dayCount.text = $"Day\n{day}";
+    }
 
     public void UpdateMoney(int amount)
     {
@@ -63,6 +66,8 @@ public class GameUI : MonoBehaviour
     public void EndTurn()
     {
         _requestTransitionEvent.RaiseVoidEvent();
+
+        // TODO deactivate button
     }
 
     public void ToggleBuildMenu()

@@ -37,17 +37,21 @@ public abstract class Structure : MonoBehaviour
 
     #endregion
 
-    protected virtual void OnDestruction()
-    {
-        if (_currentHealth <= 0)
-        {
-            // play animation
-            Destroy(gameObject);
-        }
-    }
-
     public void TakeDamage(int amount)
     {
+        Debug.Log("Taking damage");
         _currentHealth -= amount;
+
+        if (_currentHealth != _maxHealth)
+        {
+            _status.gameObject.SetActive(true);
+            _status.UpdateHealth(_currentHealth / (float)_maxHealth);
+        }
+
+        if (_currentHealth <= 0)
+        {
+            // TODO play animation
+            Destroy(gameObject);
+        }
     }
 }

@@ -16,24 +16,29 @@ public class Projectile : MonoBehaviour
 
     #endregion
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
-        // not an enemy
-        if (other.gameObject.layer != _layerToTarget) return;
-
         if (other.gameObject != _target) return;
 
-        switch (_layerToTarget.value)
+        switch (Mathf.Log(_layerToTarget.value, 2))
         {
             // enemy shoots at structure
-            case 10: _target.GetComponent<Structure>().TakeDamage(_damage); break;
+            case 10:
+                other.gameObject.GetComponent<Structure>().TakeDamage(_damage);
+                break;
             // structure shoots at enemy
-            case 11: _target.GetComponent<Enemy>().TakeDamage(_damage); break;
+            case 11:
+                other.gameObject.GetComponent<Enemy>().TakeDamage(_damage);
+                break;
         }
+
+        Destroy(gameObject);
     }
 
     void Update()
     {
+        if (!_target) Destroy(gameObject);
+        
         transform.position = Vector3.MoveTowards(
             transform.position,
             _target.transform.position,

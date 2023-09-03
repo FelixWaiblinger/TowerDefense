@@ -20,3 +20,10 @@ MonoBehaviour:
   - {fileID: 5893097886290016644, guid: 83a577f04dd4ac349819c9b1e7e5dd46, type: 3}
   - {fileID: 1851551361424950867, guid: 943248ce502dd1e4f871b5b558b93ed6, type: 3}
   - {fileID: 8262761240580215811, guid: 2a720dd796d0c28449d2e80b44f0e343, type: 3}
+  EnemyTypes:
+  - {fileID: 1001289012562610296, guid: 5cd0165aed66bda41890aae9c6175ccc, type: 3}
+  - {fileID: 4426512097696167569, guid: acba1bab6a015d24e9a9d5b8d027f032, type: 3}
+  - {fileID: 2328471305916377126, guid: ddf2b4b2ed7cbd943b4b2fd429bdf54a, type: 3}
+  - {fileID: 8020542080069806821, guid: de167ee08bdd2e846aca6ab74bcdec14, type: 3}
+  - {fileID: 6286160156192926125, guid: 250bbe90b25566f47b9e29ab3a7b3829, type: 3}
+  - {fileID: 2032039263756766969, guid: 95ca817ee7197bf4084a864acbc8f075, type: 3}

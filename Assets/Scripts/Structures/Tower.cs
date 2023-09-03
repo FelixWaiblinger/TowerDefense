@@ -21,10 +21,20 @@ public abstract class Tower : Structure
     
     #endregion
 
+    protected void FixedUpdate() // TODO maybe change to "Update"
+    {
+        if (_currentTarget) Attack();
+        else FindTarget();
+    }
+
     protected void FindTarget()
     {
         // find all enemies in range using their layer
-        var enemies = Physics.OverlapSphere(transform.position, _attackRange, 11);
+        var enemies = Physics.OverlapSphere(
+            transform.position,
+            _attackRange,
+            1<<11
+        );
         
         if (enemies.Length == 0) return;
         
@@ -44,16 +54,15 @@ public abstract class Tower : Structure
 
     protected void Attack()
     {
-        // start attack
         if (_attackTimer == 0)
         {
             CreateProjectile();
             _attackTimer += Time.deltaTime;
         }
-        // update timer for next attack
         else
         {
-            _attackTimer = _attackTimer >= 1 / _attackRate ? 0 : _attackTimer + Time.deltaTime;
+            if (_attackTimer >= 1f / _attackRate) _attackTimer = 0; // reset
+            else _attackTimer += Time.deltaTime; // increment
         }
     }
 

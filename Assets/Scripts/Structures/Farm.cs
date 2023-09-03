@@ -28,11 +28,6 @@ public class Farm : Structure
 
     #endregion
 
-    void Update()
-    {
-        OnDestruction();
-    }
-
     #region EVENT
 
     void GenerateIncome(bool isDay)

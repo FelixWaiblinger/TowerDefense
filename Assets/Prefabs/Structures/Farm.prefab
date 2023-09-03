@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4756816617824923421}
   - component: {fileID: 6585235038416390812}
+  - component: {fileID: 6882091233626175551}
   - component: {fileID: 5468811800647205779}
   m_Layer: 10
   m_Name: Farm
@@ -53,6 +54,27 @@ MonoBehaviour:
   _transitionEvent: {fileID: 11400000, guid: fa7cae83c82af9a4d81e7931ccc1f9da, type: 2}
   _moneyEvent: {fileID: 11400000, guid: 012cd237537486f498326c6e1a6d1043, type: 2}
   _incomeAmount: 15
+--- !u!65 &6882091233626175551
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5893097886290016644}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.5, y: 3.5, z: 3.5}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!114 &5468811800647205779
 MonoBehaviour:
   m_ObjectHideFlags: 0

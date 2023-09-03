@@ -10,4 +10,5 @@ public class GameData : ScriptableObject
     public float EffectsLevel = 1;
 
     public GameObject[] Structures;
+    public EnemySpawner[] EnemyTypes;
 }
